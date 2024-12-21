@@ -5,23 +5,27 @@ import { drawDoc } from "./graphics.js";
 
 var input = document.getElementById("user-input");
 
+const summarize_output = (output) => {
+        return output.split(' ').slice(-50).join(' ');
+};
+
 class Player {
         constructor() {
                 this.health = 100;
-                this.age = 15;
+                this.age = new Date();
                 this.attempt = false;
                 this.firstText = true;
         }
+        
+        get_age()
+        {
+               return Date.now() - this.age; 
+        }
 
-        //get_older()
-        //{
-
-        //}
-
-        //get_damage()
-        //{
-
-        //}
+        get_damage()
+        {
+                
+        }
 
 
 
@@ -33,8 +37,6 @@ export class Game {
                 this.player = new Player();
                 this.input = '';
                 this.instruction = '';
-                this.instructions = '';
-                this.answers = '';
                 this.magic_word = '';
                 this.context = ''; 
                 this.is_first_input = true;
@@ -53,7 +55,7 @@ export class Game {
 
         generate_game()
         {
-                this.instruction = "You are the narrator of an RPG game so introduce yourself by saying that you are the narrator and you have all powers on this universe and that the player is the chosen one to take your place if he is clever enough.Tell him the rules: that he simply have to find the magic word. This word will be a word that the you say during this paragraph but that he has only one attempt. The only two clues you can give him on the word is that it is said in this paragraph and that he has to pay close attention to details of what you say. Then ask in which context he wants to be.";
+                this.instruction = "Introduce yourself as the narrator of an RPG game with ultimate power, and explain that the player is chosen to replace you if they find the magic word hidden in your paragraph. Tell them they have one attempt, and the clues are that the word is in this paragraph and requires attention to detail. Ask the player to choose a context for the story.";
 
                 answer(this.instruction, this.input);
 
@@ -64,19 +66,25 @@ export class Game {
                 if (this.is_first_input) 
                 {
                         this.context = this.input;
-                        this.is_first_input = false;
+                        this.is_first_input = false
+                        this.instruction = `Write an RPG story based on this context: ${this.context}.Provide 3 choices and stop after the choices.`;
                 }
 
-                this.instruction = `So now generate the the story of an RPG game based on this context : ${this.context}. And generate three choices for the player to make. If you have already made a setting of the story continue the story with again 3 other choices to make, based on what you said previously : ${output} and what the player chose which is: ${this.input}. The magic word is : ${this.magic_word}. Make sure to stop at the three choices because you will tell the rest of the story after.`;
+                else {
+                        this.instruction = `Write an RPG story based on this context: ${this.context}. Continue based on this summary: ${summarize_output(output)}. Player input: ${this.input}. Provide 3 choices and stop after the choices.`;
+                }
 
                 this.instruction = this.instruction.replace(/\n/g, ' ');
                 answer(this.instruction, this.input);        
         }
 
-        //check_game_over()
-        //{
-
-        //}
+        check_game_over()
+        {
+                if (this.player.get_age() > 1000)
+                {
+                        input.placeholder = "You died of old age, you loose."
+                }
+        }
 
 
 }
@@ -85,7 +93,7 @@ let game = new Game;
 game.generate_game();
 // game.generate_word();
 document.getElementById("submit").addEventListener("click", () => {
-        //game.check_game_over();
+        game.check_game_over();
         game.input = input.value;
         game.update_instructions();
         input.value = "";

@@ -43,34 +43,40 @@ export function drawScene(narratorText, playerText) {
 }
 
 function drawText(text, x, y, maxWidth) {
-        const words = text.split(' ');
-        let line = '';
-        let currentY = y;
+    const lines = text.split('\n');
+    let currentY = y;
 
-        ctx.fillStyle = "black";
-        ctx.font = "13px Arial";
+    ctx.fillStyle = "black";
+    ctx.font = "13px Arial";
+
+    lines.forEach(lineText => {
+        const words = lineText.split(' ');
+        let line = '';
 
         for (let n = 0; n < words.length; n++) {
-                const testLine = line + words[n] + ' ';
+            const testLine = line + words[n] + ' ';
 
-                if (ctx.measureText(testLine).width > maxWidth && line) {
-                        ctx.fillText(line, x, currentY);
-                        line = words[n] + ' ';
-                        currentY += parseInt(ctx.font) * 1.2;
-                } 
-                else {
-                        line = testLine;
-                }
+            if (ctx.measureText(testLine).width > maxWidth && line) {
+                ctx.fillText(line, x, currentY);
+                line = words[n] + ' ';
+                currentY += parseInt(ctx.font) * 1.2;
+            } else {
+                line = testLine;
+            }
         }
 
         if (line) {
-                ctx.fillText(line, x, currentY);
+            ctx.fillText(line, x, currentY);
         }
+
+        currentY += parseInt(ctx.font) * 1.2;
+    });
 }
 
 export function drawDoc(outputText) {
-        ctx.drawImage(bookImg, 0, 0, canvas.width, canvas.height);
-        drawText(outputText, bookImg.x + 20, bookImg.y + 40, 600);
+    ctx.drawImage(bookImg, 0, 0, canvas.width, canvas.height);
+    drawText(outputText, bookImg.x + 150, bookImg.y + 100, 700);
 }
+
 
 

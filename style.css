@@ -26,6 +26,7 @@ h1 {
         right: 0;
         left: 0;
         bottom: 0;
+        z-index: 6;
 }
 
 #game-canvas {
@@ -63,3 +64,14 @@ h1 {
         cursor: pointer;
 }
 
+#book {
+        position: fixed;
+        bottom: 50px; /* Distance from the bottom of the viewport */
+        left: 50px; /* Distance from the right of the viewport */
+        background-color: white; /* Make it visible against the black background */
+        color: black; /* Contrast text color */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 1;
+}

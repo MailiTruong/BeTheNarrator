@@ -14,22 +14,17 @@ class Player {
                 this.health = 100;
                 this.age = new Date();
                 this.attempt = false;
-                this.firstText = true;
         }
-        
+
         get_age()
         {
-               return Date.now() - this.age; 
+                return Date.now() - this.age; 
         }
 
-        get_damage()
-        {
-                
-        }
+        //get_damage()
+        //{
 
-
-
-
+        //}
 }
 
 export class Game {
@@ -41,11 +36,15 @@ export class Game {
                 this.context = ''; 
                 this.is_first_input = true;
                 this.book_open = false;
+                this.game_over = false;
         }
 
         generate_word()
         {
-                answer(`Choose one word in all the words said in ${this.instruction} and say it without any sentence, i want the word uniquely.` ,this.input);
+                const words = output.split(/\s+/); 
+                const random_index = Math.floor(Math.random() * words.length); 
+                this.magic_word = words[random_index];  
+                console.log("the magic word is: " + this.magic_word);
         }
 
         //generate_key()
@@ -55,7 +54,7 @@ export class Game {
 
         generate_game()
         {
-                this.instruction = "Introduce yourself as the narrator of an RPG game with ultimate power, and explain that the player is chosen to replace you if they find the magic word hidden in your paragraph. Tell them they have one attempt, and the clues are that the word is in this paragraph and requires attention to detail. Ask the player to choose a context for the story.";
+                this.instruction = "Introduce yourself as the narrator of an RPG game with ultimate power, and explain that the player is chosen to replace you if they find the magic word hidden in your paragraph. Tell them they have one attempt, and the clues are that the word is in this paragraph and requires attention to detail and if they want they have a handbook to have the historic of what you said. Ask the player to choose a context for the story.";
 
                 answer(this.instruction, this.input);
 
@@ -67,11 +66,11 @@ export class Game {
                 {
                         this.context = this.input;
                         this.is_first_input = false
-                        this.instruction = `Write an RPG story based on this context: ${this.context}.Provide 3 choices and stop after the choices.`;
+                        this.instruction = `Write an RPG story based on this context: ${this.context}.Provide 3 choices and stop after the choices, the third choice must be :"C) Guess the word".`;
                 }
 
                 else {
-                        this.instruction = `Write an RPG story based on this context: ${this.context}. Continue based on this summary: ${summarize_output(output)}. Player input: ${this.input}. Provide 3 choices and stop after the choices.`;
+                        this.instruction = `Write an RPG story based on this context: ${this.context}. Continue based on this summary: ${summarize_output(output)}. Player input: ${this.input}. Provide 3 choices and stop after the choices, the choice must be : "C) Guess the word".`;
                 }
 
                 this.instruction = this.instruction.replace(/\n/g, ' ');
@@ -80,9 +79,40 @@ export class Game {
 
         check_game_over()
         {
-                if (this.player.get_age() > 1000)
+                if (this.player.get_age() > 60000)
                 {
-                        input.placeholder = "You died of old age, you loose."
+                        input.placeholder = "You died of old age, you loose. Refresh to play again.";
+                        document.getElementById("layer").removeAttribute("hidden");
+                        this.game_over = true;
+                }
+
+                if (this.input == "C" || this.input == "Guess the word".toLowerCase())
+                {
+                        this.player.attempt = true;
+                }
+
+                if (this.player.health < 0)
+                {
+                        input.placeholder = "You died killed by monsters. You loose.";
+                        document.getElementById("layer").removeAttribute("hidden");
+                        this.game_over = true;
+
+                }
+                
+                else if (this.player.attempt && this.input == this.magic_word)
+                {
+                        
+                        input.placeholder = "You win ! You are now the narrator. Refresh to play again.";
+                        document.getElementById("layer").removeAttribute("hidden");
+                        this.game_over = true;
+                }
+
+                else if (this.player.attempt && this.input != this.magic_word)
+                {
+
+                        input.placeholder = "You didn't guess the magis word, you loose.";
+                        document.getElementById("layer").removeAttribute("hidden");
+                        this.game_over = true;
                 }
         }
 
@@ -91,8 +121,11 @@ export class Game {
 
 let game = new Game;
 game.generate_game();
-// game.generate_word();
 document.getElementById("submit").addEventListener("click", () => {
+        if (game.is_first_input)
+        {
+                game.generate_word();
+        }
         game.check_game_over();
         game.input = input.value;
         game.update_instructions();

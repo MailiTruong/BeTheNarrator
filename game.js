@@ -1,4 +1,7 @@
 import { answer } from "./inference.js";
+import { output } from "./inference.js";
+import { drawScene } from "./graphics.js";
+import { drawDoc } from "./graphics.js";
 
 var input = document.getElementById("user-input");
 
@@ -35,6 +38,7 @@ export class Game {
                 this.magic_word = '';
                 this.context = ''; 
                 this.is_first_input = true;
+                this.book_open = false;
         }
 
         generate_word()
@@ -62,12 +66,11 @@ export class Game {
                         this.context = this.input;
                         this.is_first_input = false;
                 }
-                else {
-                        this.instruction = `So now generte the the story of an RPG game based on this context : ${this.context}. And generate three choices for the player to make based on the setting you made with coherence with what you said previously : ${this.answers}. The magic word is : ${this.magic_word}. Make sure to stop at the three choices because you will tell the rest of the story after.`;
 
-                        answer(this.instruction, this.input);
+                this.instruction = `So now generate the the story of an RPG game based on this context : ${this.context}. And generate three choices for the player to make. If you have already made a setting of the story continue the story with again 3 other choices to make, based on what you said previously : ${output} and what the player chose which is: ${this.input}. The magic word is : ${this.magic_word}. Make sure to stop at the three choices because you will tell the rest of the story after.`;
 
-                }        
+                this.instruction = this.instruction.replace(/\n/g, ' ');
+                answer(this.instruction, this.input);        
         }
 
         //check_game_over()
@@ -88,6 +91,17 @@ document.getElementById("submit").addEventListener("click", () => {
         input.value = "";
 });
 
-
+document.getElementById("doc").addEventListener("click", () => {
+        if (game.book_open) 
+        {
+                drawScene("","");
+                game.book_open = false;
+        }
+        else
+        {
+                drawDoc(output);
+                game.book_open = true;
+        }
+});
 
 

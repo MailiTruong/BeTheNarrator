@@ -23,6 +23,9 @@ narratorImg.src = './assets/narrator.png';
 const bubbleImg = new Image();
 bubbleImg.src = './assets/bubble.png';
 
+const bookImg = new Image();
+bookImg.src = './assets/book.png';
+
 export const player = { x: 150, y: 400, width: 100, height: 100 };
 export const narrator = { x: 600, y: 100, width: 100, height: 100 };
 export const narratorBubble = { x: narrator.x - 120, y: narrator.y - 50, width: 210, height: 110 };
@@ -63,6 +66,11 @@ function drawText(text, x, y, maxWidth) {
         if (line) {
                 ctx.fillText(line, x, currentY);
         }
+}
+
+export function drawDoc(outputText) {
+        ctx.drawImage(bookImg, 0, 0, canvas.width, canvas.height);
+        drawText(outputText, bookImg.x + 20, bookImg.y + 40, 600);
 }
 
 

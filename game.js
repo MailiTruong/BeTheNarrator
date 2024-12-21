@@ -114,6 +114,10 @@ export class Game {
                         document.getElementById("layer").removeAttribute("hidden");
                         this.game_over = true;
                 }
+                if (this.game_over)
+                {
+                        return;
+                }
         }
 
 

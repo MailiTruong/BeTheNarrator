@@ -1,77 +1,77 @@
 * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-        background-color: black;
-        font-family: Arial, Helvetica, sans-serif;
-        color: white;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
+    background-color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
-        text-align: center;
-        margin-bottom: 10px;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 #layer {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        z-index: 6;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 6;
 }
 
 #game-canvas {
-        display: block;
-        background-color: black;
-        width: 1000px;
-        height: 700px;
-        border: none;
-        margin: 0;
-        padding: 0;
+    display: block;
+    background-color: black;
+    width: 1000px;
+    height: 700px;
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 
 #input-container {
-        margin-top: 20px;
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        align-items: center;
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 #user-input {
-        padding: 10px;
-        font-size: 1rem;
-        width: 300px;
-        border-radius: 5px;
-        border: none;
+    padding: 10px;
+    font-size: 1rem;
+    width: 300px;
+    border-radius: 5px;
+    border: none;
 }
 
 #submit {
-        padding: 10px 20px;
-        font-size: 1rem;
-        color: black;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 #book {
-        position: fixed;
-        bottom: 50px; /* Distance from the bottom of the viewport */
-        left: 50px; /* Distance from the right of the viewport */
-        background-color: white; /* Make it visible against the black background */
-        color: black; /* Contrast text color */
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        z-index: 1;
+    position: fixed;
+    bottom: 50px; /* Distance from the bottom of the viewport */
+    left: 50px; /* Distance from the right of the viewport */
+    background-color: white; /* Make it visible against the black background */
+    color: black; /* Contrast text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;
 }

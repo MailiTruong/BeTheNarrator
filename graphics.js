@@ -32,14 +32,14 @@ export const narratorBubble = { x: narrator.x - 120, y: narrator.y - 50, width: 
 export const playerBubble = { x: player.x + 50, y: player.y - 80, width: 210, height: 110 };
 
 export function drawScene(narratorText, playerText) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
-        ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
-        ctx.drawImage(narratorImg, narrator.x, narrator.y, narrator.width, narrator.height);
-        ctx.drawImage(bubbleImg, narratorBubble.x, narratorBubble.y, narratorBubble.width, narratorBubble.height);
-        drawText(narratorText, narratorBubble.x + 20, narratorBubble.y + 40, 180);
-        ctx.drawImage(bubbleImg, playerBubble.x, playerBubble.y, playerBubble.width, playerBubble.height);
-        drawText(playerText, playerBubble.x + 20, playerBubble.y + 40, 180);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+    ctx.drawImage(narratorImg, narrator.x, narrator.y, narrator.width, narrator.height);
+    ctx.drawImage(bubbleImg, narratorBubble.x, narratorBubble.y, narratorBubble.width, narratorBubble.height);
+    drawText(narratorText, narratorBubble.x + 20, narratorBubble.y + 40, 180);
+    ctx.drawImage(bubbleImg, playerBubble.x, playerBubble.y, playerBubble.width, playerBubble.height);
+    drawText(playerText, playerBubble.x + 20, playerBubble.y + 40, 180);
 }
 
 function drawText(text, x, y, maxWidth) {

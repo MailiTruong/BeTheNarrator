@@ -16,6 +16,10 @@ This project implements a multi-agent interactive text-based RPG game where the 
 
 ## Demo
 
+![demo_gif](/images/demo.gif)
+
+---
+
 ## Installation and Setup
 
 1. Clone the repository:

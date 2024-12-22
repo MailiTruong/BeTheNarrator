@@ -12,19 +12,19 @@ canvas.width = 1000;
 canvas.height = 700;
 
 const backgroundImg = new Image();
-backgroundImg.src = './assets/background.png';
+backgroundImg.src = './images/background.png';
 
 const playerImg = new Image();
-playerImg.src = './assets/player.png';
+playerImg.src = './images/player.png';
 
 const narratorImg = new Image();
-narratorImg.src = './assets/narrator.png';
+narratorImg.src = './images/narrator.png';
 
 const bubbleImg = new Image();
-bubbleImg.src = './assets/bubble.png';
+bubbleImg.src = './images/bubble.png';
 
 const bookImg = new Image();
-bookImg.src = './assets/book.png';
+bookImg.src = './images/book.png';
 
 export const player = { x: 150, y: 400, width: 100, height: 100 };
 export const narrator = { x: 600, y: 100, width: 100, height: 100 };
